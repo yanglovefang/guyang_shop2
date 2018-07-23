@@ -4,6 +4,13 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+
+
+/**
+ * 
+ * @author lenvov
+ *
+ */
 @SpringBootApplication(scanBasePackages="com")
 @MapperScan("com.bw.mapper")
 public class GuyangShop2Application {
