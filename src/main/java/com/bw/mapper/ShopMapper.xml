@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bw.mapper.ShopMapper">
+	<select id="count" parameterType="com.bw.pojo.Shop" resultType="int">
+		select count(*) from d_shop s
+		<where>
+			<if test="kai!=null and kai!=''">
+				and s.creatTime &gt;= #{kai}
+			</if>
+			<if test="jie!=null and jie!=''">
+				and s.creatTime &lt;= #{jie}
+			</if>
+			<if test="miao!=miao and miao!=''">
+				and s.miao like concat('%',#{miao},'%')
+			</if>
+			<if test="sname!=miao and sname!=''">
+				and s.sname like concat('%',#{sname},'%')
+			</if>
+		</where>
+	</select>
+	<select id="getList" parameterType="com.bw.pojo.Shop" resultType="com.bw.pojo.Shop">
+		select * from d_shop s
+		<where>
+			<if test="kai!=null and kai!=''">
+				and s.creatTime &gt;= #{kai}
+			</if>
+			<if test="jie!=null and jie!=''">
+				and s.creatTime &lt;= #{jie}
+			</if>
+			<if test="miao!=miao and miao!=''">
+				and s.miao like concat('%',#{miao},'%')
+			</if>
+			<if test="sname!=miao and sname!=''">
+				and s.sname like concat('%',#{sname},'%')
+			</if>
+		</where>
+		limit ${page},#{rows}
+	</select>
+	<delete id="plsc" >
+		delete from d_shop where sid in
+			<foreach separator="," close=")" open="(" item="id" collection="ids">${id}</foreach>
+	</delete>
+	<insert id="save" parameterType="com.bw.pojo.Shop">
+		insert into d_shop 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			      		<if test="sid!=null and sid!=''">
+			      			sid,
+			      		</if>
+			      		<if test="sname!=null and sname!=''">
+			      			sname,
+			      		</if>
+			      		<if test="price!=null and price!=''">
+			      			price,
+			      		</if>
+			      		<if test="creatTime!=null and creatTime!=''">
+			      			creatTime,
+			      		</if>
+			      		<if test="updateTime!=null and updateTime!=''">
+			      			updateTime,
+			      		</if>
+			      		<if test="tai!=null and tai!=''">
+			      			tai,
+			      		</if>
+			      		<if test="miao!=null and miao!=''">
+			      			miao,
+			      		</if>
+			      		<if test="url!=null and url!=''">
+			      			url,
+			      		</if>
+			      		<if test="ku!=null and ku!=''">
+			      			ku,
+			      		</if>
+			      		<if test="xian!=null and xian!=''">
+			      			xian
+			      		</if>
+		</trim>
+	    <trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+	    				<if test="sid!=null and sid!=''">
+			      			#{sid,jdbcType=INTEGER},
+			      		</if>
+			      		<if test="sname!=null and sname!=''">
+			      			#{sname,jdbcType=VARCHAR},
+			      		</if>
+			      		<if test="price!=null and price!=''">
+			      			#{price,jdbcType=DOUBLE},
+			      		</if>
+			      		<if test="creatTime!=null and creatTime!=''">
+			      			#{creatTime,jdbcType=VARCHAR},
+			      		</if>
+			      		<if test="updateTime!=null and updateTime!=''">
+			      			#{updateTime,jdbcType=VARCHAR},
+			      		</if>
+			      		<if test="tai!=null and tai!=''">
+			      			#{tai,jdbcType=VARCHAR},
+			      		</if>
+			      		<if test="miao!=null and miao!=''">
+			      			#{miao,jdbcType=VARCHAR},
+			      		</if>
+			      		<if test="url!=null and url!=''">
+			      			#{url,jdbcType=VARCHAR},
+			      		</if>
+			      		<if test="ku!=null and ku!=''">
+			      			#{ku,jdbcType=INTEGER},
+			      		</if>
+			      		<if test="xian!=null and xian!=''">
+			      			#{xian,jdbcType=INTEGER},
+			      		</if>			   
+		</trim>
+	</insert>
+	<select id="typeList" resultType="com.bw.pojo.Type">
+		select * from d_type
+	</select>
+</mapper>
